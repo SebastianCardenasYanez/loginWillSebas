@@ -1,0 +1,140 @@
+:root {
+    --google-color: #db4437;
+    --discord-color: #7289da;
+    --facebook-color: #1877f2;
+    --background-color: #f0f2f5;
+    --text-color: #333;
+    --button-text-color: #ffffff;
+    --heading-color: #555;
+    --link-color: #1877f2;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 320px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.btn {
+    padding: 0.75rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.btn-social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--button-text-color);
+    font-weight: bold;
+}
+
+.btn-social img {
+    width: 24px;
+    height: 24px;
+}
+
+.btn-google {
+    background-color: var(--google-color);
+}
+
+.btn-discord {
+    background-color: var(--discord-color);
+}
+
+.btn-facebook {
+    background-color: var(--facebook-color);
+}
+
+.btn-google:hover,
+.btn-discord:hover,
+.btn-facebook:hover {
+    opacity: 0.9;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* Botón de alternancia */
+.btn-toggle {
+    background-color: var(--link-color);
+    color: var(--button-text-color);
+    margin-top: 1rem;
+}
+
+/* Estilos de la sección de Política de Privacidad */
+.privacy-policy {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #ddd;
+    color: var(--text-color);
+}
+
+/* Ocultar la política de privacidad inicialmente */
+.hidden {
+    display: none;
+}
+
+.privacy-policy h2,
+.privacy-policy h3 {
+    font-size: 1.1rem;
+    color: var(--heading-color);
+    margin: 0.5rem 0;
+}
+
+.privacy-policy p,
+.privacy-policy ol {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--text-color);
+}
+
+.privacy-policy ol {
+    padding-left: 1.5rem;
+}
+
+.privacy-policy a {
+    color: var(--link-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.privacy-policy a:hover {
+    color: darken(var(--link-color), 10%);
+}

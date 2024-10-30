@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="login-form">
+            <h1>Iniciar Sesión</h1>
+            <div class="social-buttons">
+                <a href="/auth/google" class="btn btn-social btn-google">
+                    <img src="./storage/imgs/DeviconGoogle.svg" alt="Google Logo">
+                    Iniciar sesión con Google
+                </a>
+                <a href="/auth/discord" class="btn btn-social btn-discord">
+                    <img src="./storage/imgs/SkillIconsDiscord.svg" alt="Discord Logo">
+                    Iniciar sesión con Discord
+                </a>
+                <a href="/auth/facebook" class="btn btn-social btn-facebook">
+                    <img src="./storage/imgs/LogosFacebook.svg" alt="Facebook Logo">
+                    Iniciar sesión con Facebook
+                </a>
+            </div>
+
+            <!-- Botón para mostrar/ocultar la política de privacidad -->
+            <button id="privacy-btn" class="btn btn-toggle">Ver Política de Privacidad</button>
+
+            <!-- Sección de política de privacidad oculta inicialmente -->
+            <div id="privacy-policy" class="privacy-policy hidden">
+                <h2>Política de Privacidad</h2>
+                <p>La protección de tu privacidad es importante para nosotros. Esta política describe cómo recopilamos, usamos y protegemos tu información personal.</p>
+
+                <h3>Información Recopilada</h3>
+                <p>Recopilamos información personal como nombre, correo electrónico e imagen de perfil para permitir la autenticación mediante proveedores externos (Google, Facebook, Discord).</p>
+
+                <h3>Uso de la Información</h3>
+                <p>La información que recopilamos se utiliza únicamente para autenticación y para mejorar la experiencia de usuario en nuestra aplicación.</p>
+
+                <h3>Protección de la Información</h3>
+                <p>Mantenemos prácticas de seguridad para proteger tu información. No compartimos tus datos con terceros sin tu consentimiento.</p>
+
+                <h2>Eliminación de Datos de Usuario</h2>
+                <p>Para solicitar la eliminación de tus datos personales, visita nuestra página de eliminación de datos: 
+                    <a href="http://localhost.com/eliminacion-datos" target="_blank">http://localhost.com/eliminacion-datos</a>.
+                </p>
+                <p>Alternativamente, puedes seguir estos pasos:</p>
+                <ol>
+                    <li>Envía un correo a <strong>contacto@tuapp.com</strong> con el asunto "Eliminación de Datos".</li>
+                    <li>Incluye en el mensaje tu nombre de usuario y el correo asociado a tu cuenta.</li>
+                    <li>Responderemos y eliminaremos tus datos en un plazo máximo de 30 días.</li>
+                </ol>
+                <p>Si tienes alguna pregunta, por favor contacta con nosotros en <a href="mailto:contacto@tuapp.com">contacto@tuapp.com</a>.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript para mostrar/ocultar la política de privacidad -->
+    <script>
+        document.getElementById('privacy-btn').addEventListener('click', function() {
+            const privacyPolicy = document.getElementById('privacy-policy');
+            privacyPolicy.classList.toggle('hidden');
+            this.textContent = privacyPolicy.classList.contains('hidden') ? 'Ver Política de Privacidad' : 'Ocultar Política de Privacidad';
+        });
+    </script>
+</body>
+</html>
