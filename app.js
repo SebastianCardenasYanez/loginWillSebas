@@ -5,6 +5,7 @@ const sessionMiddleware = require("./server/middelware/sessionConfig");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const DiscordStrategy = require('passport-discord').Strategy;  
 const FacebookStrategy = require('passport-facebook').Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
 const authRoutes = require('./server/router/userRouter');
 const index = require("./server/router/viewRouter")
 const User = require("./server/model/userModel")
@@ -158,6 +159,47 @@ passport.use(new DiscordStrategy({
       return cb(error);
     }
   }
+));
+
+passport.use(new GitHubStrategy({
+  clientID: process.env.GITHUB_CLIENT_ID,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET,
+  callbackURL: "http://localhost:5000/auth/github/callback",
+  scope: ['user:email']
+},
+async (accessToken, refreshToken, profile, cb) => {
+  try {
+    console.log("Usuario logueado con Github:", profile);
+
+    // Verificar si el usuario ya existe con ese email
+    let user = await User.findOne({ email: profile.emails[0].value });
+    console.log("encrontro el usuario", user);
+    
+    if (user) {
+      // Si el usuario existe, actualiza su proveedor si no estaba registrado por Facebook
+      user.provider = 'github';
+      user.lastLogin = Date.now();
+      await user.save();
+      return cb(null, user);
+    }
+
+    // Si el usuario no existe, crea uno nuevo
+    user = new User({
+      providerId: profile.id,
+      name: profile.displayName,
+      email: profile.emails[0].value,
+      profilePicture: profile.photos[0].value,
+      provider: 'github'
+    });
+    console.log("por aqui va user", user);
+    await user.save();
+    console.log("Nuevo usuario guardado:", user);
+    return cb(null, user);
+  } catch (error) {
+    console.error("Error al procesar el usuario:", error);
+    return cb(error);
+  }
+}
 ));
 // Serialización del usuario para la sesión
 passport.serializeUser((user, done) => {

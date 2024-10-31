@@ -3,6 +3,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const DiscordStrategy = require('passport-discord').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const GitHubStrategy = require("passport-github2").Strategy;
 const User = require('../../server/model/userSchema'); // Asegúrate de que el modelo esté en la misma ruta
 
 // Serialización y deserialización de usuario
@@ -83,6 +84,34 @@ passport.use(new FacebookStrategy({
                 name: profile.displayName,
                 email: profile.emails[0].value,
                 provider: 'facebook',
+                profilePicture: profile.photos[0].value
+            });
+        } else {
+            user.lastLogin = new Date();
+            await user.save();
+        }
+
+        done(null, user);
+    } catch (error) {
+        done(error, null);
+    }
+}));
+
+
+passport.use(new GitHubStrategy({
+    clientID: 'GITHUB_CLIENT_ID',
+    clientSecret: 'GITHUB_CLIENT_SECRET',
+    callbackURL: '/auth/github/callback',
+}, async (accessToken, refreshToken, profile, done) => {
+    try {
+        let user = await User.findOne({ providerId: profile.id, provider: 'github' });
+
+        if (!user) {
+            user = await User.create({
+                providerId: profile.id,
+                name: profile.displayName,
+                email: profile.emails[0].value,
+                provider: 'github',
                 profilePicture: profile.photos[0].value
             });
         } else {
