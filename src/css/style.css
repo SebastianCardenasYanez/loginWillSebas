@@ -2,7 +2,8 @@
     --google-color: #db4437;
     --discord-color: #7289da;
     --facebook-color: #1877f2;
-    --background-color: #f0f2f5;
+    --github-color: #2B3137;
+    --background-color: #222222;
     --text-color: #333;
     --button-text-color: #ffffff;
     --heading-color: #555;
@@ -24,8 +25,8 @@ body {
     background-color: #ffffff;
     padding: 2rem;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%;
+    box-shadow: 0 0px 30px 10px rgba(141, 141, 141, 0.61);
+    width: 100%;    
     max-width: 320px;
 }
 
@@ -53,6 +54,7 @@ h1 {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.1s ease;
+    text-decoration: none;
 }
 
 .btn-social {
@@ -79,6 +81,10 @@ h1 {
 
 .btn-facebook {
     background-color: var(--facebook-color);
+}
+
+.btn-github{
+    background-color: var(--github-color);
 }
 
 .btn-google:hover,
